@@ -50,7 +50,7 @@ function handleError(error: Error, res: ServerResponse) {
   if (error.message.includes("ENOENT")) {
     logger.warn(`asset not found ${error.stack}`)
     res.writeHead(404)
-    return res.end
+    return res.end()
   }
 
   logger.error(`caught error on API ${error.stack}`)

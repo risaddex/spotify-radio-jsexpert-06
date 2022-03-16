@@ -6,7 +6,9 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon",
-    "test": "NODE_OPTIONS=--experimental-vm-modules npx jest"
+    "test": "LOG_DISABLED=true NODE_OPTIONS='--experimental-vm-modules --no-warnings' npx jest --no-cache",
+    "test:watch": "LOG_DISABLED=true NODE_OPTIONS='--experimental-vm-modules --no-warnings' npx jest --no-cache --watchAll",
+    "test:coverage": "LOG_DISABLED=true NODE_OPTIONS='--experimental-vm-modules --no-warnings' npx jest --no-cache --coverage tests/unit"
   },
   "keywords": [],
   "author": "",

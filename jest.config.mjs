@@ -12,36 +12,56 @@ const defaultConfig= {
       statements: 100
     }
   },
+  preset: "ts-jest/presets/js-with-ts-esm",
   maxWorkers: "50%",
   watchPathIgnorePatterns: ["node_modules"],
   transformIgnorePatterns: ["node_modules"],
+  extensionsToTreatAsEsm: [".ts"],
   globals:{
     "ts-jest":{
       useESM:true
     }
   },
-  extensionsToTreatAsEsm: [".ts"]
+ 
   
+}
+
+
+const backendConfig = {
+  ...defaultConfig,
+  testEnvironment: "node",
+  displayName: "backend",
+  collectCoverageFrom: [
+    "server/",
+    "!server/index.ts"
+  ],
+  transformIgnorePatterns: [
+    ...defaultConfig.transformIgnorePatterns,
+    "public"
+  ],
+  testMatch: [
+    "**/tests/**/server/**/*.test.ts"
+  ],
+}
+
+/** @type {import('@jest/types').Config.InitialProjectOptions} */
+const frontendConfig = {
+  ...defaultConfig,
+  testEnvironment: "jsdom",
+  displayName: "frontend",
+  collectCoverageFrom: [
+    "public/"
+  ],
+  transformIgnorePatterns: [
+    ...defaultConfig.transformIgnorePatterns,
+    "server"
+  ],
+  testMatch: [
+    "**/tests/**/public/**/*.test.ts"
+  ],
 }
 
 /** @type {import('@jest/types').Config.InitialOptions} */
 export default {
-  preset: "ts-jest",
-  projects: [{
-    ...defaultConfig,
-    transform:{},
-    testEnvironment: "node",
-    displayName: "backend",
-    collectCoverageFrom: [
-      "server/",
-      "!server/index.ts"
-    ],
-    transformIgnorePatterns: [
-      ...defaultConfig.transformIgnorePatterns,
-      "public"
-    ],
-    testMatch: [
-      "**/tests/**/server/**/*.test.ts"
-    ],
-  }]
+  projects: [backendConfig,frontendConfig]
 }
