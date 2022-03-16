@@ -1,15 +1,12 @@
-import { IncomingMessage, ServerResponse } from "http";
-import * as internal from "stream";
-import config from "../../../server/config"
-import { Service } from "../../../server/service";
-import { handler } from "../../../server/routes"
-import TestUtil from '../_util/testUtil';
 import { jest } from '@jest/globals';
-import path from 'path';
 import fs from 'fs';
 import fsPromises from 'fs/promises';
+import path from 'path';
+import config from "../../../server/config";
+import { Service } from "../../../server/service";
+import TestUtil from '../_util/testUtil';
 
-const { pages, location, constants: { CONTENT_TYPE }, dir: { publicDirectory } } = config
+const { dir: { publicDirectory } } = config
 
 describe("#Service - test service implementation", () => {
   beforeEach(() => {
@@ -69,7 +66,7 @@ describe("#Service - test service implementation", () => {
     jest.spyOn(fs, fs.createReadStream.name as "createReadStream").mockReturnValue(readableStream)
 
     const expectedResult = {
-      stream:readableStream,
+      stream: readableStream,
       type: extension
     }
 

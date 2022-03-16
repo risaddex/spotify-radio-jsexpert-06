@@ -1,10 +1,9 @@
-import { IncomingMessage, ServerResponse } from "http";
-import * as internal from "stream";
-import config from "../../../server/config"
-import { Controller } from "../../../server/controller";
-import { handler } from "../../../server/routes"
-import TestUtil from '../_util/testUtil';
 import { jest } from '@jest/globals';
+import { Writable } from "stream";
+import config from "../../../server/config";
+import { Controller } from "../../../server/controller";
+import { handler } from "../../../server/routes";
+import TestUtil from '../_util/testUtil';
 
 const { pages, location, constants: { CONTENT_TYPE } } = config
 describe("#Routes - test site for api response", () => {
@@ -38,13 +37,13 @@ describe("#Routes - test site for api response", () => {
     )
       .mockResolvedValue({
         stream: mockFileStream,
-        type:""
+        type: ""
       })
 
     jest.spyOn(
       mockFileStream,
       "pipe"
-    ).mockReturnValue({} as internal.Writable)
+    ).mockReturnValue({} as Writable)
 
     await handler(...params.values())
 
@@ -70,7 +69,7 @@ describe("#Routes - test site for api response", () => {
     jest.spyOn(
       mockFileStream,
       "pipe"
-    ).mockReturnValue({} as internal.Writable)
+    ).mockReturnValue({} as Writable)
 
     await handler(...params.values())
 
@@ -98,7 +97,7 @@ describe("#Routes - test site for api response", () => {
     jest.spyOn(
       mockFileStream,
       "pipe"
-    ).mockReturnValue({} as internal.Writable)
+    ).mockReturnValue({} as Writable)
 
     await handler(...params.values())
 
@@ -129,7 +128,7 @@ describe("#Routes - test site for api response", () => {
     jest.spyOn(
       mockFileStream,
       "pipe"
-    ).mockReturnValue({} as internal.Writable)
+    ).mockReturnValue({} as Writable)
 
     await handler(...params.values())
 
@@ -156,28 +155,28 @@ describe("#Routes - test site for api response", () => {
       const params = TestUtil.defaultHandleParams()
       params.request.method = "GET"
       params.request.url = '/index.png'
-      
+
       jest.spyOn(Controller.prototype, Controller.prototype.getFileStream.name as "getFileStream").mockRejectedValue(
         new Error("error: ENOENT: no such file or directory")
       )
-  
+
       await handler(...params.values())
-  
+
       expect(params.response.writeHead).toHaveBeenCalledWith(404)
       expect(params.response.end).toHaveBeenCalled()
-  
+
     })
     test("given an error it should respond with 500", async () => {
       const params = TestUtil.defaultHandleParams()
       params.request.method = "GET"
       params.request.url = '/index.png'
-      
+
       jest.spyOn(Controller.prototype, Controller.prototype.getFileStream.name as "getFileStream").mockRejectedValue(
         new Error("error")
       )
-  
+
       await handler(...params.values())
-  
+
       expect(params.response.writeHead).toHaveBeenCalledWith(500)
       expect(params.response.end).toHaveBeenCalled()
     })
