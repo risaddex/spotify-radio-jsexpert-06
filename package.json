@@ -10,12 +10,10 @@
     "test:watch": "LOG_DISABLED=true NODE_OPTIONS='--experimental-vm-modules --no-warnings' npx jest --no-cache --watchAll",
     "test:coverage": "LOG_DISABLED=true NODE_OPTIONS='--experimental-vm-modules --no-warnings' npx jest --no-cache --coverage tests/unit",
     "test:e2e": "LOG_DISABLED=true NODE_OPTIONS='--experimental-vm-modules --no-warnings' npx jest --no-cache  tests/e2e",
-
     "docker": "docker-compose up --build app",
     "docker:test": "docker-compose up --build test",
     "docker:test:watch": "docker-compose up --build test-watch",
     "docker:test:coverage": "docker-compose up --build test-coverage"
-
   },
   "keywords": [],
   "author": "",
@@ -26,6 +24,7 @@
   "devDependencies": {
     "@types/jest": "^27.4.1",
     "@types/node": "^17.0.21",
+    "@types/supertest": "^2.0.11",
     "@types/throttle": "^1.0.1",
     "jest": "^27.5.1",
     "nodemon": "^2.0.15",
