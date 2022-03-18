@@ -1,3 +1,0 @@
-server:
- - service = regras de negócio
- - controller = acessa o service

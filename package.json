@@ -4,6 +4,9 @@
   "type": "module",
   "description": "Seja bem vindo(a) à sexta Semana Javascript Expert. Este é o código inicial para iniciar nossa jornada.",
   "main": "index.js",
+  "engines": {
+    "node": "17.7.1"
+  },
   "scripts": {
     "start": "nodemon",
     "test": "LOG_DISABLED=true NODE_OPTIONS='--experimental-vm-modules --no-warnings' npx jest --runInBand --no-cache",
