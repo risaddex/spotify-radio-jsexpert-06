@@ -2,4 +2,4 @@ import { createServer } from 'http'
 import { handler } from './routes'
 
 
-export default createServer(handler)
+export default () => createServer(handler)

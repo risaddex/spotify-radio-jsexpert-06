@@ -76,6 +76,7 @@ describe("API e2e test suite", () => {
       expect(onChunk).not.toHaveBeenCalled()
 
     })
+    
     test('it should receive data stream if the process is playing', async () => {
       const server = await getTestServer()
       const onChunk = jest.fn()

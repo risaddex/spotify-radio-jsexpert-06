@@ -1,5 +1,5 @@
 import { IncomingMessage, ServerResponse } from 'http'
-import { Readable, Writable } from 'stream'
+import { PassThrough, Readable, Writable } from 'stream'
 import { jest } from '@jest/globals';
 import { ReadStream } from 'fs';
 export default class TestUtil {
@@ -15,10 +15,10 @@ export default class TestUtil {
     }) as ReadStream
   }
 
-  static generateWritableStream(onData = (...data: any[]) => { }) {
+  static generateWritableStream(onData?: (...data: any[]) => void) {
     return new Writable({
       write(chunk, enc, cb) {
-        onData(chunk)
+        onData?.(chunk)
 
         cb(null)
       }
@@ -46,5 +46,9 @@ export default class TestUtil {
       values: () => Object.values(data) as unknown as [IncomingMessage, ServerResponse],
       ...data
     }
+  }
+
+  static generatePassThroughStream() {
+    return new PassThrough()
   }
 }

@@ -9,20 +9,10 @@ services:
       -  npm
       -  start
     volumes:
-      - .:/spotify-radio
-      - node_modules:/spotify-radio/node_modules
+      - .:/home/node/spotify-radio
+      - node_modules:/home/node/spotify-radio/node_modules
     ports:
       - 3000:3000
-  test-e2e:
-    image: spotify-radio
-    build: .
-    command:
-      - npm
-      - run
-      - test:e2e
-    volumes:
-      - .:/spotify-radio
-      - node_modules:/spotify-radio/node_modules
   test:
     image: spotify-radio
     build: .
@@ -31,8 +21,8 @@ services:
       - run
       - test
     volumes:
-      - .:/spotify-radio
-      - node_modules:/spotify-radio/node_modules
+      - .:/home/node/spotify-radio
+      - node_modules:/home/node/spotify-radio/node_modules
   test-watch:
     image: spotify-radio
     build: .
@@ -41,20 +31,19 @@ services:
       - run
       - test:watch
     volumes:
-      - .:/spotify-radio
-      - node_modules:/spotify-radio/node_modules
+      - .:/home/node/spotify-radio
+      - node_modules:/home/node/spotify-radio/node_modules
   test-coverage:
     image: spotify-radio
     build: .
+    user: node
     command:
       - npm
       - run
       - test:coverage
     volumes:
-      - .:/spotify-radio
-      - node_modules:/spotify-radio/node_modules
+      - .:/home/node/spotify-radio
+      - node_modules:/home/node/spotify-radio/node_modules
 
 volumes:
   node_modules: {}
-  
-

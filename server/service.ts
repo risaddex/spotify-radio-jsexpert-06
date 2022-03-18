@@ -4,7 +4,7 @@ import config from './config'
 import path from 'path'
 import streamPromises from 'stream/promises'
 import { randomUUID } from 'crypto'
-import { PassThrough, Writable } from 'stream'
+import { PassThrough, Readable, Writable } from 'stream'
 import Throttle from 'throttle'
 import childProcess from 'child_process'
 import { logger } from './util'
@@ -85,8 +85,7 @@ export class Service {
         once(stderr, "readable"),
         once(stdout, "readable"),
       ])
-
-      const [success, error]: Buffer[] = [stdout, stderr].map(stream => stream.read())
+      const [success, error]: Readable[] = [stdout, stderr].map(stream => stream.read())
       if (error) return await Promise.reject(error)
 
       return success
@@ -95,9 +94,7 @@ export class Service {
         .replace(/k/, "000")
 
     } catch (error) {
-      if (error instanceof Error) {
-        logger.error(`Bitrate error:${error.message} - ${error.stack}`)
-      }
+      logger.error(`Bitrate error:${error}`)
       return fallbackBitRate;
     }
   }
