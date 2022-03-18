@@ -1,4 +1,4 @@
-# Spotify Radio - Semana JS Expert 6.0
+# Spotify Radio - Semana JS Expert 6.0 
 
 Seja bem vindo(a) à sexta Semana Javascript Expert. Este é o código inicial para iniciar nossa jornada.
 
@@ -63,3 +63,9 @@ Marque esse projeto com uma estrela 🌟
 
 - Rodei `npm test` mas nada acontece, o que fazer?
     - Verifique a versão do seu Node.js. Estamos usando na versão 17. Entre no [site do node.js](https://nodejs.org) e baixe a versão mais recente.
+    
+## Extras
+- Utilizando typescript + ESModules (typescript 5+) (ESNext + ES2022)
+- Volta
+- TS-Jest com ESModules
+- Live reload with nodemon and ts-node loader
